@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 public class GreetingResourceTest {
 
   @Test
-  public void when_sendingEmptyName_then_returnHelloOnly() {
+  public void whenSendingEmptyName_thenReturnHelloOnly() {
     given()
       .when().get("/hello")
       .then()
@@ -20,7 +20,7 @@ public class GreetingResourceTest {
   }
 
   @Test
-  public void when_sendingRandomName_then_returnHelloPlusRandomName() {
+  public void whenSendingRandomName_thenReturnHelloPlusRandomName() {
     String uuid = UUID.randomUUID().toString();
     given()
       .queryParam("name", uuid)
