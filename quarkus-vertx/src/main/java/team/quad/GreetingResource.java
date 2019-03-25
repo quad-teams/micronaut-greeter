@@ -1,8 +1,7 @@
 package team.quad;
 
-import io.vertx.core.Vertx;
-import io.vertx.core.eventbus.Message;
-import java.util.concurrent.CompletableFuture;
+import io.vertx.axle.core.eventbus.EventBus;
+import io.vertx.axle.core.eventbus.Message;
 import java.util.concurrent.CompletionStage;
 import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
@@ -16,19 +15,13 @@ import javax.ws.rs.core.MediaType;
 public class GreetingResource {
 
   @Inject
-  Vertx vertx;
+  EventBus eventBus;
 
   @GET
   @Produces(MediaType.TEXT_PLAIN)
   public CompletionStage<String> sayHello(@DefaultValue("") @QueryParam("name") String name) {
-    CompletableFuture<String> completableFuture = new CompletableFuture<>();
-
-    vertx.eventBus().<String>send("say-hello", name, handler -> {
-      Message<String> result = handler.result();
-      completableFuture.complete(result.body());
-    });
-
-    return completableFuture;
+    return eventBus.<String>send("say-hello", name)
+      .thenApply(Message::body);
   }
 
 }

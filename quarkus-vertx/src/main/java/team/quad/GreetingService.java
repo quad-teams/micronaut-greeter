@@ -1,13 +1,14 @@
 package team.quad;
 
 import io.quarkus.vertx.ConsumeEvent;
-import io.vertx.core.eventbus.Message;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class GreetingService {
 
   @ConsumeEvent("say-hello")
-  public void sayHello(Message<String> message) {
-    message.reply("Hello " + message.body());
+  public CompletionStage<String> sayHello(String name) {
+    return CompletableFuture.supplyAsync(() -> "Hello " + name);
   }
 
 }
