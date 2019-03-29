@@ -1,0 +1,5 @@
+profile: function-aws
+defaultPackage: micronaut.poll
+---
+testFramework: junit
+sourceLanguage: java
