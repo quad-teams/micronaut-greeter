@@ -2,13 +2,17 @@ package team.quad.poll;
 
 import io.micronaut.function.executor.FunctionInitializer;
 import java.io.IOException;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public class CLIPollFunction extends FunctionInitializer {
 
-  public PollResponse execute(PollRequest msg) {
-    return new PollResponse(msg.getCategory());
+  @Inject
+  private PollService pollService;
+
+  public String execute(PollRequest request) {
+    return pollService.vote(request);
   }
 
   public static void main(String... args) throws IOException {

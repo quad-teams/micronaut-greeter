@@ -9,13 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PollFunctionTest {
 
   @Test
-  public void testFunction() throws Exception {
+  public void testFunction() {
     EmbeddedServer server = ApplicationContext.run(EmbeddedServer.class);
 
     PollClient client = server.getApplicationContext().getBean(PollClient.class);
     PollRequest request = new PollRequest("tooling");
-    PollResponse response = client.apply(request);
-    assertEquals(response.getMessage(), "Voted for " + request.getCategory());
+    assertEquals(client.apply(request), "Voted for " + request.getCategory());
     server.stop();
   }
 }

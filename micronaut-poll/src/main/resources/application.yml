@@ -1,3 +1,3 @@
 micronaut:
-    function:
-        name: micronaut-poll
+  function:
+    name: micronaut-poll
