@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: micronaut.greeter
+---
+testFramework: junit
+sourceLanguage: java
